@@ -163,6 +163,8 @@ pub enum ProtocolVersion {
     P2,
     #[display(fmt = "P3")]
     P3,
+    #[display(fmt = "P4")]
+    P4,
 }
 
 #[derive(Debug, Error, Display)]
@@ -181,6 +183,7 @@ impl TryFrom<u64> for ProtocolVersion {
             1 => Ok(ProtocolVersion::P1),
             2 => Ok(ProtocolVersion::P2),
             3 => Ok(ProtocolVersion::P3),
+            4 => Ok(ProtocolVersion::P4),
             version => Err(UnknownProtocolVersion { version }),
         }
     }
@@ -192,6 +195,7 @@ impl From<ProtocolVersion> for u64 {
             ProtocolVersion::P1 => 1,
             ProtocolVersion::P2 => 2,
             ProtocolVersion::P3 => 3,
+            ProtocolVersion::P4 => 4,
         }
     }
 }
@@ -556,7 +560,7 @@ impl Deserial for ExchangeRate {
 #[derive(SerdeSerialize, SerdeDeserialize, Serial, Debug, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct MintDistribution {
-    mint_per_slot:       MintRate,
+    mint_per_slot:       Option<MintRate>,
     baking_reward:       RewardFraction,
     finalization_reward: RewardFraction,
 }

@@ -379,6 +379,26 @@ pub enum SpecialTransactionOutcome {
         /// The account address where the foundation receives the tax.
         foundation_account: AccountAddress,
     },
+    #[serde(rename_all = "camelCase")]
+    /// Lpool?
+    BlockAccrueReward {
+        /// Total amount of transaction fees in the block.
+        l_pool_reward:   Amount,
+        /// The bakerId of account where the baker receives the reward.
+        baker_id:              BakerId,
+        /// The amount of CCD that goes to the baker.
+        baker_reward:       Amount,
+        #[serde(rename = "oldGASAccount")]
+        /// Previous balance of the GAS account.
+        old_gas_account:    Amount,
+        #[serde(rename = "newGASAccount")]
+        /// New balance of the GAS account.
+        new_gas_account:    Amount,
+        /// The amount of CCD that goes to the foundation.
+        foundation_charge:  Amount,
+        /// Total amount of transaction fees in the block.
+        transaction_fees:   Amount,
+    },
 }
 
 impl SpecialTransactionOutcome {
@@ -404,6 +424,11 @@ impl SpecialTransactionOutcome {
                 } else {
                     vec![*baker, *foundation_account]
                 }
+            }
+            SpecialTransactionOutcome::BlockAccrueReward {
+                ..
+            } => {
+                vec![]
             }
         }
     }
@@ -1391,7 +1416,7 @@ pub struct ChainParameters {
     pub micro_gtu_per_euro:           ExchangeRate,
     /// Extra number of epochs before reduction in stake, or baker
     /// deregistration is completed.
-    pub baker_cooldown_epochs:        Epoch,
+    pub baker_cooldown_epochs:        Option<Epoch>,
     /// The limit for the number of account creations in a block.
     pub account_creation_limit:       CredentialsPerBlockLimit,
     /// Current reward parameters.
@@ -1399,7 +1424,7 @@ pub struct ChainParameters {
     /// Index of the foundation account.
     pub foundation_account_index:     AccountIndex,
     /// Minimum threshold for becoming a baker.
-    pub minimum_threshold_for_baking: Amount,
+    pub minimum_threshold_for_baking: Option<Amount>,
 }
 
 #[derive(Debug, SerdeSerialize, SerdeDeserialize)]
@@ -1445,7 +1470,7 @@ pub struct PendingUpdates {
     pub mint_distribution:            UpdateQueue<MintDistribution>,
     pub transaction_fee_distribution: UpdateQueue<TransactionFeeDistribution>,
     pub gas_rewards:                  UpdateQueue<GASRewards>,
-    pub baker_stake_threshold:        UpdateQueue<Amount>,
+    pub baker_stake_threshold:        Option<UpdateQueue<Amount>>,
     pub add_anonymity_revoker:        UpdateQueue<id::types::ArInfo<id::constants::ArCurve>>,
     pub add_identity_provider:        UpdateQueue<id::types::IpInfo<id::constants::IpPairing>>,
 }
