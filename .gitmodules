@@ -1,9 +1,9 @@
 [submodule "concordium-base"]
 	path = concordium-base
-	url = ../concordium-base.git
+	url = https://github.com/Concordium/concordium-base.git
 [submodule "concordium-grpc-api"]
 	path = concordium-grpc-api
-	url = ../concordium-grpc-api.git
+	url = https://github.com/Concordium/concordium-grpc-api.git
 [submodule "concordium-contracts-common"]
 	path = concordium-contracts-common
-	url = ../concordium-contracts-common.git
+	url = https://github.com/Concordium/concordium-contracts-common.git
