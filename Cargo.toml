@@ -32,14 +32,17 @@ ed25519 = "=1.3"
 
 tokio-postgres = { version = "^0.7.5", features = ["with-serde_json-1"] }
 
-crypto_common = { version = "*", path = "./concordium-base/rust-src/crypto_common", features = ["encryption"] }
-id = { version = "*", path = "./concordium-base/rust-src/id", default-features=false }
-ecvrf = { version = "*", path = "./concordium-base/rust-src/ecvrf" }
-aggregate_sig = { version = "*", path = "./concordium-base/rust-src/aggregate_sig" }
-encrypted_transfers = { version = "*", path = "./concordium-base/rust-src/encrypted_transfers" }
-eddsa_ed25519 = { version = "*", path = "./concordium-base/rust-src/eddsa_ed25519/" }
-concordium-contracts-common = { version = "*", path = "./concordium-contracts-common/", features = ["derive-serde"]}
-random_oracle = { version = "*", path = "./concordium-base/rust-src/random_oracle/" }
+crypto_common = { version = "*", git ="https://github.com/Concordium/concordium-base.git", features = ["encryption"] }
+id = { version = "*", git ="https://github.com/Concordium/concordium-base.git", default-features=false }
+ecvrf = { version = "*", git ="https://github.com/Concordium/concordium-base.git" }
+aggregate_sig = { version = "*", git ="https://github.com/Concordium/concordium-base.git" }
+encrypted_transfers = { version = "*", git ="https://github.com/Concordium/concordium-base.git" }
+eddsa_ed25519 = { version = "*", git ="https://github.com/Concordium/concordium-base.git" }
+concordium-contracts-common = { version = "*", git ="https://github.com/Concordium/concordium-contracts-common.git", features = ["derive-serde"]}
+random_oracle = { version = "*", git ="https://github.com/Concordium/concordium-base.git" }
+
+misc_tools = { version = "*", git ="https://github.com/Concordium/concordium-base.git" }
+
 
 
 [dev-dependencies]

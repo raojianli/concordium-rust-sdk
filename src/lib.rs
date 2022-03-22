@@ -14,6 +14,8 @@ pub mod types;
 /// Re-export of the identity library.
 pub use id;
 
+pub use client_server_helpers;
+
 /// Re-export of common helper functionality.
 pub use crypto_common as common;
 
